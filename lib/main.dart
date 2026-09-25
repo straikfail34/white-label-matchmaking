@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'core/config/supabase_config.dart';
-import 'features/discovery/screens/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -9,11 +7,7 @@ void main() async {
   // Inicialización de la base de datos
   await SupabaseConfig.initialize();
 
-  runApp(
-    const ProviderScope(
-      child: MainApp(),
-    ),
-  );
+  runApp(const MainApp());
 }
 
 class MainApp extends StatelessWidget {
@@ -23,9 +17,17 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Matchmaking App',
-      theme: ThemeData.dark(), // Tema oscuro base para contraste
+      theme: ThemeData.dark(),
       debugShowCheckedModeBanner: false,
-      home: const HomeScreen(),
+      home: const Scaffold(
+        body: Center(
+          child: Text(
+            'Conexión a Supabase establecida.\nSistema operativo y listo para desarrollo modular.',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 18, color: Colors.white),
+          ),
+        ),
+      ),
     );
   }
 }
