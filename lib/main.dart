@@ -1,19 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'core/config/supabase_config.dart';
-import 'app.dart';
+import 'features/discovery/screens/home_screen.dart';
 
 void main() async {
-  // Garantiza que los bindings del framework estén listos antes de ejecutar código asíncrono.
   WidgetsFlutterBinding.ensureInitialized();
   
-  // Inicialización de la conexión con el backend.
+  // Inicialización de la base de datos
   await SupabaseConfig.initialize();
 
-  // Ejecución de la aplicación envuelta en ProviderScope para Riverpod.
   runApp(
     const ProviderScope(
-      child: App(),
+      child: MainApp(),
     ),
   );
+}
+
+class MainApp extends StatelessWidget {
+  const MainApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Matchmaking App',
+      theme: ThemeData.dark(), // Tema oscuro base para contraste
+      debugShowCheckedModeBanner: false,
+      home: const HomeScreen(),
+    );
+  }
 }
